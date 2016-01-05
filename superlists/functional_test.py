@@ -32,13 +32,17 @@ class NewVisitorTest(unittest.TestCase):
         # "1. Buy peacock feathers" as an item in a to-do lists
         inputbox.send_keys(Keys.ENTER)
 
+
         table= self.browser.find_element_by_id('id_list_table')
         rows= table.find_elements_by_tag_name('tr')
-        # We will find that this is too naive
-        self.assertTrue(
-            any(row.text=='1. Buy peacock feathers' for row in rows),
-            "New to-do item did not appear in table"
-        )
+        self.assertIn('1. Buy peacock feathers', [row.text for row in rows])
+
+        #self.assertTrue(
+        #    any(row.text=='1. Buy peacock feathers' for row in rows),
+            #"New to-do item did not appear -- text was: \n%s"%(
+            #    table.text,
+            #)
+        #)
         # There is still a text box inviting her to add another item.
         # She enters 'Use peacock feathers to make fly'
         # (Edith is very methodolical)
