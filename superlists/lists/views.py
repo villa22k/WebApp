@@ -13,9 +13,10 @@ def view_list(request, list_id):
     # list all the items from that list
     list_= List.objects.get(id= list_id)
     # this is a list of type Item
-    items = Item.objects.filter(list=list_)
-    return render(request, 'list.html',
-                    { 'items': items, 'list': list_ }
+
+    return render(
+                    request, 'list.html',
+                    { 'list': list_, }
         )
 
 #list_id will be passed as a capture group -- it will be passed as list_id
