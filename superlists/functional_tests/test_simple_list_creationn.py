@@ -1,8 +1,6 @@
 from .base import TodoFunctionalTest
 from selenium import webdriver
 
-
-
 class NewVisitorTest(TodoFunctionalTest):
     def test_can_start_a_list_and_retrieve_it_later(self):
         # Edith has heard about a coll new online to-do app.
