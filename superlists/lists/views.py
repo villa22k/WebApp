@@ -22,3 +22,15 @@ def add_item(request, list_id):
     list_= List.objects.get(id= list_id)
     Item.objects.create(text=request.POST['item_text'], list= list_)
     return redirect('/lists/%d/' %(list_.id))
+
+# request -- becuase this is a function not method
+def delete_item(request, item_id):
+    # get list
+    list_= List.objects.get(id= item_id)
+    # get item
+    delete_item=Item.objects.get(id= item_id)
+
+    # delete item
+    List.objects.delete(delete_item)
+
+    return redirect('/lists/%d/' %(list_.id))
