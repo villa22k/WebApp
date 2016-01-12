@@ -13,8 +13,8 @@ def new_list(request):
         item.save()
     except ValidationError:
         new_list.delete()
-        error= "You can't have an empty list item"
-        return render(render, 'home.html',{'error': error})
+        error = "You can't have an empty list item"
+        return render(request, 'home.html', {'error': error})
     return redirect('/lists/%d/' %(new_list.id,))
 
 def view_list(request, list_id):

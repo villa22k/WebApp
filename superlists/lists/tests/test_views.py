@@ -19,7 +19,6 @@ class HomePageTest(TestCase):
         self.assertEqual(response.content.decode(), expected_html)
 
 
-
 class NewListTest(TestCase):
 
     def test_saving_a_POST_request(self):
