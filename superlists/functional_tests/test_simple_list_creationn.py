@@ -28,7 +28,7 @@ class NewVisitorTest(TodoFunctionalTest):
         # as an item in a to-do lists
         edith_list_url = self.browser.current_url
         self.assertRegexpMatches(edith_list_url, '/lists/.+')
-        self.check_for_row_in_list_table('1. Buy peacock feathers')
+        self.check_for_row_in_list_table('Buy peacock feathers')
 
         # There is still a text box inviting her to add another item.
         # She enters 'Use peacock feathers to make fly'
@@ -36,8 +36,8 @@ class NewVisitorTest(TodoFunctionalTest):
         self.enter_a_new_item('Use peacock feathers to make fly')
 
         # The homepage updates again, and now shows both items on her lists
-        self.check_for_row_in_list_table('1. Buy peacock feathers')
-        self.check_for_row_in_list_table('2. Use peacock feathers to make fly')
+        self.check_for_row_in_list_table('Buy peacock feathers')
+        self.check_for_row_in_list_table('Use peacock feathers to make fly')
 
         # Now a new user, Francis, comes along.
 
