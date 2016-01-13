@@ -20,12 +20,6 @@
       placeholder="Enter a to-do item" />
       {% csrf_token %}
     </form>
-    <form method="DELETE" action="{% block delete_action %}{% endblock %}">
-      <input id="id_new_item" name="item_text"
-      class="form-control input-lg"
-      placeholder="Enter a to-do item" />
-      {% csrf_token %}
-    </form>
       </div>
     </div>
   </div>

@@ -26,12 +26,11 @@ def add_item(request, list_id):
     Item.objects.create(text=request.POST['item_text'], list= list_)
     return redirect('/lists/%d/' %(list_.id))
 
-def delete_item(request, list_id):
-    list_ = List.objects.get(id= list_id)
-    Item.objects.create(text=request.DELETE['item_text'], list= list_)
-    print(first_item.Item.text)
+def delete_item(request, item_id):
     # Get Item
-    delete_item=list_.Item.objects.get(id= item_id)
+    delete_item = Item.objects.get(id=item_id)
+    # Get list
+    list_ = delete_item.list
     # Delete item
     delete_item.delete()
     return redirect('/lists/%d/' %(list_.id))
