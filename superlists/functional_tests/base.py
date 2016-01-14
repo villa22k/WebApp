@@ -22,7 +22,6 @@ class TodoFunctionalTest(StaticLiveServerTestCase):
         self.fail('"%s" not in table - "%s"' %(item_text,table.text))
 
     def check_for_row_in_list_table(self, row_text):
-        print(row_text)
         row = self.find_table_row(row_text)
         self.assertIsNotNone(row)
 

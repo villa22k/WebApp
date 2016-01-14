@@ -106,8 +106,8 @@ class ListViewTest(TestCase):
         )
         self.assertEqual(response.status_code,200)
         self.assertTemplateUsed(response, 'list.html')
-        expected_error= escape("You can't have an empty item")
-        #self.assertContains(response, expected_error)
+        expected_error= escape("You can't have an empty list item")
+        self.assertContains(response, expected_error)
 
     def test_invalid_items_arent_saved(self):
         current_list= List.objects.create()
@@ -143,4 +143,34 @@ class ListViewTest(TestCase):
         item1= Item.objects.get(id= item1.id)
         item2= Item.objects.get(id= item2.id)
         self.assertTrue(item1.is_done)
+        self.assertFalse(item2.is_done)
+
+    def test_POST_multiple_items_done(self):
+        current_list= List.objects.create()
+        item1=Item.objects.create(text='Item 1', list= current_list)
+        item2=Item.objects.create(text= 'Item 2', list= current_list)
+
+        reponse= self.client.post(
+            '/lists/%d/items/'%(current_list.id),
+            data ={'mark_item_done': [item1.id, item2.id]},
+        )
+
+        item1= Item.objects.get(id= item1.id)
+        item2= Item.objects.get(id= item2.id)
+        self.assertTrue(item1.is_done)
+        self.assertTrue(item2.is_done)
+
+    def test_POST_zero_items_done(self):
+        current_list= List.objects.create()
+        item1=Item.objects.create(text='Item 1', list= current_list)
+        item2=Item.objects.create(text='Item 2', list= current_list)
+
+        reponse= self.client.post(
+            '/lists/%d/items/'%(current_list.id),
+            data ={ },
+        )
+
+        item1= Item.objects.get(id= item1.id)
+        item2= Item.objects.get(id= item2.id)
+        self.assertFalse(item1.is_done)
         self.assertFalse(item2.is_done)
