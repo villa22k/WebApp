@@ -16,14 +16,14 @@ class ToggleDoneTest(TodoFunctionalTest):
             row.find_elements_by_css_selector('.todo-done')
             print("Done")
         except NoSuchElementException:
-            self.fail('%s not marked done' %(todo_text))
+            self.fail("'%s' not marked done" %(todo_text))
 
     def check_not_marked_off(self, todo_text):
         try:
             self.check_marked_off(todo_text)
         except:
             return
-        self.fail(''%s' is marked done' %(todo_text))
+        self.fail("'%s' is marked done'" %(todo_text))
 
     def test_can_toggle_finished_items(self):
 

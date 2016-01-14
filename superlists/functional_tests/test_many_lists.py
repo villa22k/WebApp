@@ -1,11 +1,11 @@
 from .base import TodoFunctionalTest
 
 class ManyListsTest(TodoFunctionalTest):
+
     def change_list_name(self, list_name):
         pass
 
-    def test_can_create_and _view_multiple_lists(self):
-
+    def test_can_create_and_view_multiple_lists(self):
         # Edith comes to the home page creates a new List
         # and fills her grocery List
         self.browser.get(self.live_server_url)

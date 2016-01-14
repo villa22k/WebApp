@@ -18,6 +18,17 @@ class HomePageTest(TestCase):
         expected_html= render_to_string('home.html')
         self.assertEqual(response.content.decode(), expected_html)
 
+    def test_home_page_has_todo_lists(self):
+        list1=List.objects.create(name= 'List 1')
+        list2=List.objects.create(name= 'List 2')
+        response= self.client.get('/')
+
+        context= response.context['todo_lists']
+        self.assertEqual(len(context),2)
+        self.assertEqual(context[0], list1)
+        self.assertEqual(context[1], list2)
+
+
 
 class NewListTest(TestCase):
 
@@ -125,6 +136,16 @@ class ListViewTest(TestCase):
 
         self.assertContains(response,'input type="checkbox"')
 
+    def test_edit_list_name(self):
+        current_list= List.objects.create()
+        response=self.client.post(
+        '/lists/%d/'% (current_list.id,),
+        data={'list_name': 'New List'},
+        )
+
+        self.assertEqual(List.objects.first().name,'New List')
+
+class EditListTest(TestCase):
     def test_POST_items_toggles_done(self):
         # Create list and items
         current_list= List.objects.create()

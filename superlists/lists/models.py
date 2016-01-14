@@ -2,7 +2,7 @@ from django.db import models
 
 # Python is running this in order so List comes before
 class List(models.Model):
-    pass
+    name=models.TextField(default='')
 
 class Item(models.Model):
     text = models.TextField(default='')
